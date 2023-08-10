@@ -30,8 +30,8 @@ src="https://github.com/KhulnaSoft/.github/blob/master/assets/social-icons/docke
 <a href="https://slack.khulnasoft.com" alt="Slack">
 <img src="https://img.shields.io/badge/Slack-@khulnasoft.svg?logo=slack" /></a>
 
-<a href="https://twitter.com/khulnasoft" alt="Follow Layer5 on Twitter">
-<img src="https://img.shields.io/twitter/follow/khulnasoft?label=Layer5&style=social" /></a>
+<a href="https://twitter.com/khulnasoft" alt="Follow KhulnaSoft on Twitter">
+<img src="https://img.shields.io/twitter/follow/khulnasoft?label=KhulnaSoft&style=social" /></a>
 
 <a href="https://twitter.com/khulnasoft" alt="Follow Meshery on Twitter">
 <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/khulnasoft?label=khulnasoft&style=social"></a>
@@ -40,7 +40,7 @@ src="https://github.com/KhulnaSoft/.github/blob/master/assets/social-icons/docke
 <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/smp_spec?label=Service%20Mesh%20Performance&style=social"></a>
 </p>
 
-[Layer5](https://khulnasoft.com)'s cloud native application and infrastructure management software enables organizations to expect more from their infrastructure. We embrace _developer_-defined infrastructure. We empower developers to change how they write applications, support _operators_ in rethinking how they run modern infrastructure, and enable _product owners_ to regain full-control over their product portfolio.
+[KhulnaSoft](https://khulnasoft.com)'s cloud native application and infrastructure management software enables organizations to expect more from their infrastructure. We embrace _developer_-defined infrastructure. We empower developers to change how they write applications, support _operators_ in rethinking how they run modern infrastructure, and enable _product owners_ to regain full-control over their product portfolio.
 
 See an <a href="https://khulnasoft.com/community/handbook/repository-overview">overview of repositories</a> and projects by tech stack in the <a href="https://khulnasoft.com/community/handbook/">Community Handbook</a>.
 
