@@ -5,7 +5,7 @@ Our projects are community-built and welcome collaboration. 👍 Be sure to see 
 
 <p style="clear:both;">
 <a href ="https://khulnasoft.com/community/meshmates"><img alt="MeshMates" src=".github/readme/images/KhulnaSoft-MeshMentors.png" style="margin-right:10px; margin-bottom:7px;" width="28%" align="left" /></a>
-<h3>Find your MeshMate</h3>
+<h3>Find your Meshtee</h3>
 
 <p>MeshMates are experienced KhulnaSoft community members, who will help you learn your way around, discover live projects and expand your community network. 
 Become a <b>Meshtee</b> today!</p>
