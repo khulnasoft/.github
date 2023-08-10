@@ -4,7 +4,7 @@
 Our projects are community-built and welcome collaboration. 👍 Be sure to see the <a href="https://docs.google.com/document/d//edit">KhulnaSoft Community Welcome Guide</a> for a tour of resources available to you and jump into our <a href="http://slack.khulnasoft.com">Slack</a>!
 
 <p style="clear:both;">
-<a href ="https://khulnasoft.com/community/meshmates"><img alt="MeshMates" src="[https://raw.githubusercontent.com/layer5io/.github/readme/images/Layer5-MeshMentors.png](https://raw.githubusercontent.com/layer5io/.github/master/.github/readme/images/Layer5-MeshMentors.png)" style="margin-right:10px; margin-bottom:7px;" width="28%" align="left" /></a>
+<a href ="https://khulnasoft.com/community/meshmates"><img alt="MeshMates" src="https://raw.githubusercontent.com/layer5io/.github/master/.github/readme/images/Layer5-MeshMentors.png" style="margin-right:10px; margin-bottom:7px;" width="28%" align="left" /></a>
 <h3>Find your Meshtee</h3>
 
 <p>MeshMates are experienced KhulnaSoft community members, who will help you learn your way around, discover live projects and expand your community network. 
