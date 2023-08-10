@@ -33,10 +33,10 @@ src="https://github.com/KhulnaSoft/.github/blob/master/assets/social-icons/docke
 <a href="https://twitter.com/khulnasoft" alt="Follow KhulnaSoft on Twitter">
 <img src="https://img.shields.io/twitter/follow/khulnasoft?label=KhulnaSoft&style=social" /></a>
 
-<a href="https://twitter.com/khulnasoft" alt="Follow Meshery on Twitter">
+<a href="https://twitter.com/tfsecurity" alt="Follow TFsecurity on Twitter">
 <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/khulnasoft?label=khulnasoft&style=social"></a>
 
-<a href="https://twitter.com/smp_spec" alt="Follow Service Triangle Performance on Twitter">
+<a href="https://twitter.com/triangle" alt="Follow Service Triangle Performance on Twitter">
 <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/smp_spec?label=Service%20Mesh%20Performance&style=social"></a>
 </p>
 
