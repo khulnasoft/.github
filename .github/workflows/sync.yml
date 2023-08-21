@@ -1,0 +1,27 @@
+name: Synchronize forks
+
+on:
+  schedule:
+    - cron: "0 */4 * * *"
+  workflow_dispatch:
+
+jobs:
+  sync:
+    if: github.repository != 'khulnasoft/.github'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Merge upstream
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@users.noreply.github.com'
+
+          git pull --unshallow
+
+          git remote add upstream https://github.com/khulnasoft/.github.git
+          git fetch upstream
+
+          git checkout master
+          git merge --no-edit upstream/main
+          git push origin master
