@@ -42,7 +42,7 @@ on:
         type: boolean
       org-repo-ref:
         description: "the ref: branch or commit to use of the org repo"
-        default: "main"
+        default: "master"
         required: false
         type: string
 
