@@ -67,3 +67,10 @@ src="https://github.com/KhulnaSoft/.github/blob/master/assets/social-icons/linke
 <a href="https://hub.docker.com/u/khulnasoft/"><img alt="docker_logo" 
 src="https://github.com/KhulnaSoft/.github/blob/master/assets/social-icons/docker.svg"></a>
 </p>
+
+  <iframe src="https://securityscorecard.com/security-rating/badge/khulnasoft.com"
+    width="256"
+    height="100"
+    frameBorder="0"
+  >
+  </iframe>
