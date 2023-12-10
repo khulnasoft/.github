@@ -1,5 +1,5 @@
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       type:
         description: "the expected lint entrypoint (derived from language by default)"
