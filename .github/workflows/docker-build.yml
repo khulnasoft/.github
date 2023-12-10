@@ -1,6 +1,7 @@
 name: Docker Build
 
 on:
+  workflow_dispatch:
   release:
     types: [released]
 
@@ -15,14 +16,14 @@ jobs:
       valid: ${{ steps.check-tag.outputs.valid }}
 
     steps:
-      - name: Find release
-        id: release
-        run: |
-          JSON=$(curl -s https://api.khulnasoft.io/releases/latest)
-          LINK=$(jq -r '.links[] | select(.display == "Linux") | .link' <<< $JSON)
-          echo "link=$LINK" >> $GITHUB_OUTPUT
-          VERSION=$(jq -r '.version' <<< $JSON)
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
+#      - name: Find release
+#        id: release
+#        run: |
+#          JSON=$(curl -s https://api.khulnasoft.io/releases/latest)
+#          LINK=$(jq -r '.links[] | select(.display == "Linux") | .link' <<< $JSON)
+#          echo "link=$LINK" >> $GITHUB_OUTPUT
+#          VERSION=$(jq -r '.version' <<< $JSON)
+#          echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Check Tag
         id: check-tag
