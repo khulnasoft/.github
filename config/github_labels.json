@@ -1,0 +1,21 @@
+[
+  { "name": "Priority: Low", "color": "c1e532" },
+  { "name": "Priority: Medium", "color": "ffda20" },
+  { "name": "Priority: High", "color": "ff9920" },
+  { "name": "Priority: Critical", "color": "fb4344" },
+  { "name": "Status: Abandoned", "color": "d2d5d9" },
+  { "name": "Status: Accepted", "color": "c1e532" },
+  { "name": "Status: Available", "color": "32e5b0" },
+  { "name": "Status: Blocked", "color": "fb4344" },
+  { "name": "Status: Completed", "color": "3be1ff" },
+  { "name": "Status: In Progress", "color": "d2d5d9" },
+  { "name": "Status: On Hold", "color": "fb4344" },
+  { "name": "Status: Review Needed", "color": "ffda20" },
+  { "name": "Status: Waiting For Design", "color": "ffda20" },
+  { "name": "Type: Bug", "color": "fb4344" },
+  { "name": "Type: Maintenance", "color": "ffda20" },
+  { "name": "Type: Feature", "color": "208bff" },
+  { "name": "Type: Question", "color": "f55794" },
+  { "name": "good first issue", "color": "c260fb" },
+  { "name": "help wanted", "color": "3be68d" }
+]
