@@ -11,7 +11,6 @@
 ## Welcome 👋
 
 We are [Khulnasoft](https://khulnasoft.com/).
-**Securing and managing the software supply chain. Proud parents of [Syft](https://github.com/khulnasoft/syft) and [Grype](https://github.com/khulnasoft/grype)**
 
 ### Blog 
 
