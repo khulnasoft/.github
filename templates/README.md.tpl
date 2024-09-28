@@ -17,7 +17,7 @@ We are [Khulnasoft](https://khulnasoft.com/).
 
 We regularly write about what we're working on; here are some recent blog posts:
 
-{{range rss "https://khulnasoft.com/feed/" 5}}
+{{range rss "https://khulnasoft-lab.github.io/feeds/" 5}}
 - [{{.Title}}]({{.URL}}) ({{humanize .PublishedAt}})
 {{- end}}
 
