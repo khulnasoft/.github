@@ -20,7 +20,3 @@ We regularly write about what we're working on; here are some recent blog posts:
 ### Community
 
 We discuss our open source tools on <a href="https://khulnasoft.com/discourse">Discourse</a>. Here are some recent topics:
-
-{{range rss "https://khulnasoft.discourse.group/latest.rss" 5}}
-- [{{.Title}}]({{.URL}}) ({{humanize .PublishedAt}})
-{{- end}}
