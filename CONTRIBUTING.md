@@ -34,7 +34,7 @@ When filing a feature request, please **provide as much information and context 
 2. **Describe the solution you’d like to see.** A clear and concise description of what you would like to happen. Are you willing to work on implementing this solution?
 3. **Describe alternatives you’ve considered.** A clear and concise description of any alternative solutions or features you’ve considered.
 
-As you create the feature request, you will be [guided to provide relevant information](.github/ISSUE_TEMPLATE/---feature-request.md).
+As you create the feature request, you will be [guided to provide relevant information](.github/ISSUE_TEMPLATE/feature-request.yml).
 
 ## 📝 Creating Pull Requests
 We welcome contributions to the project that:
@@ -47,7 +47,7 @@ Please follow these steps to have your contribution considered by the maintainer
 1. Fork and clone this repository.
 2. Create a new branch: `git checkout -b my-branch-name`.
 3. Make your changes and verify that the checks are still passing.
-4. Push to your fork and submit a pull request accordingly to [the guidelines](.github/pull_request_template.md).
+4. Push to your fork and submit a pull request accordingly to [the guidelines](PULL_REQUEST_TEMPLATE/pull_request_template_oss.md).
 5. Sign a CLA (if present).
 6. Wait till your changes are reviewed and merged. 🥳
 
