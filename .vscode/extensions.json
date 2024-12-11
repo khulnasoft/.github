@@ -1,0 +1,17 @@
+{
+    "recommendations": [
+      "ms-azuretools.vscode-docker",       // Docker extension for managing containers and images
+      "dbaeumer.vscode-eslint",           // Linting support for JavaScript and TypeScript
+      "esbenp.prettier-vscode",           // Code formatter for various languages
+      "ms-python.python",                 // Python extension for debugging and linting
+      "redhat.vscode-yaml",               // YAML file validation and support
+      "hashicorp.terraform",              // Terraform files syntax highlighting
+      "eamodio.gitlens",                  // Enhanced Git capabilities
+      "mhutchie.git-graph",               // Visual Git history
+      "editorconfig.editorconfig",        // Maintains consistent coding styles
+      "ms-vscode-remote.remote-containers", // Support for working with dev containers
+      "github.vscode-pull-request-github", // GitHub pull request management
+      "yzhang.markdown-all-in-one"        // Markdown editing enhancements
+    ]
+  }
+  

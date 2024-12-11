@@ -1,0 +1,84 @@
+---
+- name: Deploy Application
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Ensure Docker is installed
+      apt:
+        name: docker.io
+        state: present
+      when: ansible_os_family == "Debian"
+
+    - name: Ensure Docker is running
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Install kubectl
+      apt:
+        name: kubectl
+        state: present
+      when: ansible_os_family == "Debian"
+
+    - name: Ensure kubectl is available
+      command: kubectl version --client
+      register: kubectl_version
+      failed_when: kubectl_version.rc != 0
+      changed_when: false
+
+    - name: Install Helm
+      shell: |
+        curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+      when: ansible_os_family == "Debian"
+
+    - name: Add ArgoCD repo
+      shell: |
+        kubectl create namespace argocd || true
+        kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+      when: ansible_os_family == "Debian"
+      tags: argo
+
+    - name: Install application via ArgoCD
+      shell: |
+        argocd app create {{ application_name }}
+        argocd app sync {{ application_name }}
+      environment:
+        ARGOCD_SERVER: "{{ argocd_server }}"
+        ARGOCD_AUTH_TOKEN: "{{ argocd_auth_token }}"
+      tags: argo
+
+    - name: Apply Kubernetes manifests for application
+      kubectl:
+        kubeconfig: "{{ kubeconfig_path }}"
+        namespace: "{{ app_namespace }}"
+        state: present
+        src: "{{ item }}"
+      with_items:
+        - "kubernetes/deployment.yml"
+        - "kubernetes/service.yml"
+        - "kubernetes/ingress.yml"
+      tags: kubernetes
+
+    - name: Wait for application to be running
+      kubectl:
+        kubeconfig: "{{ kubeconfig_path }}"
+        namespace: "{{ app_namespace }}"
+        state: started
+        resource: pod
+        name: "{{ application_name }}"
+      register: pod_status
+      until: pod_status.status == 'Running'
+      retries: 10
+      delay: 30
+
+    - name: Notify about the deployment status
+      debug:
+        msg: "Application {{ application_name }} is successfully deployed and running."
+      when: pod_status.status == 'Running'
+
+    - name: Clean up old versions
+      shell: |
+        kubectl delete pods --namespace {{ app_namespace }} -l app={{ application_name }} --grace-period=0 --force
+      when: ansible_os_family == "Debian"
+      tags: cleanup

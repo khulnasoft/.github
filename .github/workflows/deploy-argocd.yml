@@ -1,0 +1,68 @@
+name: Deploy to ArgoCD
+
+on:
+  push:
+    branches:
+      - main  # Trigger the workflow on pushes to the main branch
+  pull_request:
+    branches:
+      - main  # Trigger the workflow on pull requests to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+    
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up kubectl to interact with the Kubernetes cluster
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          kubectl-version: 'v1.23.0'  # Use the appropriate version of kubectl
+
+      # Step 3: Set up ArgoCD CLI
+      - name: Set up ArgoCD CLI
+        run: |
+          curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/v2.6.3/argocd-linux-amd64
+          chmod +x /usr/local/bin/argocd
+
+      # Step 4: Login to ArgoCD
+      - name: Login to ArgoCD
+        run: |
+          argocd login argocd.example.com --username ${{ secrets.ARGOCD_USERNAME }} --password ${{ secrets.ARGOCD_PASSWORD }} --insecure
+        env:
+          ARGOCD_USERNAME: ${{ secrets.ARGOCD_USERNAME }}
+          ARGOCD_PASSWORD: ${{ secrets.ARGOCD_PASSWORD }}
+
+      # Step 5: Sync the ArgoCD application (syncs the app with the latest changes)
+      - name: Sync ArgoCD Application
+        run: |
+          argocd app sync my-app  # Replace `my-app` with your actual ArgoCD application name
+        env:
+          ARGOCD_USERNAME: ${{ secrets.ARGOCD_USERNAME }}
+          ARGOCD_PASSWORD: ${{ secrets.ARGOCD_PASSWORD }}
+
+      # Step 6: Wait for the application to be deployed
+      - name: Wait for the ArgoCD application to be deployed
+        run: |
+          argocd app wait my-app --health --timeout 600  # Adjust the timeout if needed
+        env:
+          ARGOCD_USERNAME: ${{ secrets.ARGOCD_USERNAME }}
+          ARGOCD_PASSWORD: ${{ secrets.ARGOCD_PASSWORD }}
+
+      # Step 7: Optionally, notify the team of the deployment status (e.g., send a Slack message)
+      - name: Notify on successful deployment
+        if: success()
+        run: |
+          echo "Deployment to ArgoCD was successful"
+          # You can integrate Slack, email, or other notification services here
+
+      # Optional: Notify on failure
+      - name: Notify on failed deployment
+        if: failure()
+        run: |
+          echo "Deployment to ArgoCD failed"
+          # You can integrate Slack, email, or other notification services here

@@ -1,0 +1,62 @@
+{
+    // Editor settings
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit"
+    },
+    
+    // File encoding and end-of-line preferences
+    "files.encoding": "utf8",
+    "files.eol": "\n",
+    "files.exclude": {
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/CVS": true,
+      "**/.DS_Store": true
+    },
+  
+    // Docker integration
+    "docker.host": "tcp://localhost:2375",
+    "docker.images.refreshInterval": 180,
+  
+    // Python settings
+    "python.defaultInterpreterPath": "python3",
+    "python.formatting.provider": "black",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+  
+    // ESLint and Prettier
+    "eslint.enable": true,
+    "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+    "prettier.requireConfig": true,
+  
+    // YAML validation
+    "yaml.format.enable": true,
+    "yaml.schemas": {
+      "https://json.schemastore.org/github-workflow.json": ".github/workflows/*"
+    },
+  
+    // Git settings
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "git.enableSmartCommit": true,
+  
+    // Extensions recommendations
+    "extensions.ignoreRecommendations": false,
+  
+    // Remote container settings
+    "remote.containers.workspaceMountConsistency": "delegated",
+  
+    // Terminal settings
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "terminal.integrated.fontSize": 14,
+  
+    // IntelliSense
+    "typescript.suggest.autoImports": true,
+    "javascript.suggest.autoImports": true
+  }
+  

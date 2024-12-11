@@ -1,0 +1,50 @@
+name: Run Ansible Playbook
+
+on:
+  workflow_dispatch:  # Allows manual triggering of the workflow
+  push:
+    branches:
+      - main  # Trigger on pushes to the main branch
+
+jobs:
+  ansible:
+    runs-on: ubuntu-latest  # Run on the latest Ubuntu image
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Python for Ansible
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.8
+
+      # Step 3: Install Ansible and dependencies
+      - name: Install Ansible
+        run: |
+          sudo apt update
+          sudo apt install -y ansible
+          sudo apt install -y python3-pip
+          pip install ansible  # Ensure Ansible is installed using pip if required
+          
+      # Step 4: Set up Ansible configuration and playbook execution
+      - name: Run Ansible Playbook
+        run: |
+          # Install any additional dependencies needed for your playbook
+          sudo apt-get install -y ansible-lint  # Optional: Install Ansible linting for better playbook checks
+
+          # If you need to specify an inventory or custom configuration:
+          ansible-playbook -i inventory/production playbooks/deploy.yml  # Example playbook
+
+          # For a specific playbook (change as necessary):
+          # ansible-playbook -i inventory/production playbooks/setup-docker.yml
+          # ansible-playbook -i inventory/production playbooks/install-argocd.yml
+          
+      # Step 5: (Optional) Run tests after deployment
+      - name: Run Post-deployment Tests
+        run: |
+          # Example: Run some tests after the playbook is executed, such as verifying deployment success
+          curl http://localhost:8080/health || exit 1  # Replace with your test URL or command
+          

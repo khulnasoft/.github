@@ -1,0 +1,62 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Python: Current File",
+        "type": "python",
+        "request": "launch",
+        "program": "${file}",
+        "console": "integratedTerminal"
+      },
+      {
+        "name": "Node.js: Launch Program",
+        "type": "node",
+        "request": "launch",
+        "program": "${workspaceFolder}/index.js",
+        "runtimeExecutable": "node",
+        "skipFiles": ["<node_internals>/**"],
+        "console": "integratedTerminal"
+      },
+      {
+        "name": "Docker: Python Debug",
+        "type": "python",
+        "request": "attach",
+        "connect": {
+          "host": "localhost",
+          "port": 5678
+        },
+        "pathMappings": [
+          {
+            "localRoot": "${workspaceFolder}",
+            "remoteRoot": "/app"
+          }
+        ]
+      },
+      {
+        "name": "Docker: Node.js Debug",
+        "type": "node",
+        "request": "attach",
+        "port": 9229,
+        "address": "localhost",
+        "restart": true,
+        "localRoot": "${workspaceFolder}",
+        "remoteRoot": "/app",
+        "protocol": "inspector"
+      },
+      {
+        "name": "Attach to Docker Container",
+        "type": "docker",
+        "request": "attach",
+        "platform": "node",
+        "containerName": "${workspaceFolderBasename}"
+      },
+      {
+        "name": "Launch Chrome Debugger",
+        "type": "chrome",
+        "request": "launch",
+        "url": "http://localhost:3000",
+        "webRoot": "${workspaceFolder}"
+      }
+    ]
+  }
+  

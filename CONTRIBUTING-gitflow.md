@@ -10,9 +10,9 @@ While this isn't an absolutely necessary step, if you plan on doing anything mor
 
 ## Add 'upstream' repo to list of remotes
 ```
-git remote add upstream https://github.com/khulnasoft/gpt-db.git
+git remote add upstream https://github.com/KhulnaSoft/khulnasoft.git
 ``` 
-("gpt-db" is used as the example repo. Be sure to reference the _actual_ repo you're contributing to e.g. "gpt-db-linkerd").
+("khulnasoft" is used as the example repo. Be sure to reference the _actual_ repo you're contributing to e.g. "khulnasoft-linkerd").
 
 ## Verify the new remote named 'upstream'
 ```

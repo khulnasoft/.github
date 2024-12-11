@@ -1,0 +1,49 @@
+name: Pull Request Labeler
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    # Trigger the workflow on pull request events (opened, synchronized, reopened)
+    # You can adjust the events depending on your use case
+
+jobs:
+  label:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
+    
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up GitHub CLI
+      - name: Set up GitHub CLI
+        run: |
+          curl -fsSL https://cli.github.com/packages/githubcli-archive.key | sudo tee /etc/apt/trusted.gpg.d/githubcli-archive.key > /dev/null
+          sudo apt update
+          sudo apt install gh
+
+      # Step 3: Get the pull request information (e.g., changes in specific directories or files)
+      - name: Determine labels for PR
+        id: label
+        run: |
+          PR_CHANGED_FILES=$(gh pr diff --base main --json files -q '.files[].path')  # Get changed files in the PR
+
+          # Logic to determine labels based on file paths or changes
+          if echo "$PR_CHANGED_FILES" | grep -q 'Dockerfile'; then
+            LABEL="docker"
+          elif echo "$PR_CHANGED_FILES" | grep -q 'README.md'; then
+            LABEL="documentation"
+          elif echo "$PR_CHANGED_FILES" | grep -q 'src'; then
+            LABEL="code"
+          else
+            LABEL="misc"
+          fi
+
+          echo "label=$LABEL" >> $GITHUB_ENV  # Set the label as an environment variable
+
+      # Step 4: Apply the label to the pull request
+      - name: Apply label to PR
+        run: |
+          gh pr edit ${{ github.event.pull_request.number }} --add-label ${{ env.label }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
