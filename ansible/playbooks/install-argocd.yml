@@ -1,0 +1,75 @@
+---
+- name: Install ArgoCD on Kubernetes Cluster
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Create argocd namespace
+      kubectl:
+        kubeconfig: "{{ kubeconfig_path }}"
+        namespace: argocd
+        state: present
+        resource: namespace
+      when: ansible_os_family == "Debian"
+
+    - name: Install ArgoCD via kubectl
+      kubectl:
+        kubeconfig: "{{ kubeconfig_path }}"
+        namespace: argocd
+        state: present
+        src: "https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml"
+      when: ansible_os_family == "Debian"
+
+    - name: Expose ArgoCD API server as a LoadBalancer
+      kubectl:
+        kubeconfig: "{{ kubeconfig_path }}"
+        namespace: argocd
+        state: present
+        resource: service
+        definition: |
+          apiVersion: v1
+          kind: Service
+          metadata:
+            name: argocd-server
+            namespace: argocd
+            labels:
+              app.kubernetes.io/name: argocd-server
+          spec:
+            ports:
+              - port: 80
+                targetPort: 8080
+            selector:
+              app.kubernetes.io/name: argocd-server
+            type: LoadBalancer
+      when: ansible_os_family == "Debian"
+
+    - name: Wait for ArgoCD service to be accessible
+      kubectl:
+        kubeconfig: "{{ kubeconfig_path }}"
+        namespace: argocd
+        state: started
+        resource: service
+        name: argocd-server
+      register: argocd_service_status
+      until: argocd_service_status.status == 'Running'
+      retries: 10
+      delay: 30
+
+    - name: Get ArgoCD Admin Password
+      kubectl:
+        kubeconfig: "{{ kubeconfig_path }}"
+        namespace: argocd
+        resource: secret
+        name: argocd-initial-admin-secret
+        field: data.password
+      register: argocd_password
+      no_log: true
+
+    - name: Decode ArgoCD Admin Password
+      debug:
+        msg: "ArgoCD Admin Password is: {{ argocd_password.ansible_facts.kubernetes_resource.data.password | b64decode }}"
+      when: argocd_password is defined
+
+    - name: Output ArgoCD server URL
+      debug:
+        msg: "ArgoCD is now installed. Access it via: http://{{ ansible_host }}:80"
+      when: ansible_os_family == "Debian"

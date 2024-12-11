@@ -1,0 +1,37 @@
+# Docker registry configuration
+registry:
+  url: "my-registry.com"  # Replace with your Docker registry URL (e.g., Docker Hub, AWS ECR, etc.)
+  username: "your-username"  # Your registry username (or use environment variable for security)
+  password: "your-password"  # Your registry password (or use environment variable for security)
+
+# Default repository information
+repository:
+  name: "my-image"  # Default image name
+  tag: "latest"     # Default tag for images
+
+# Docker configuration settings
+docker:
+  # Path to the Dockerfile (relative to the script location)
+  dockerfile: "./Dockerfile"
+  
+  # Additional build arguments (if any)
+  build_args:
+    - "--no-cache"
+
+  # Settings for pushing images to the registry
+  push:
+    enabled: true  # Set to false if you don't want to push images automatically
+    retries: 3     # Number of retries on push failure
+    delay: 5       # Delay (in seconds) between retries
+
+# Logging settings
+logging:
+  level: "info"   # Options: debug, info, warn, error
+  log_file: "build.log"  # Log file for build process
+
+# Optional: Proxy settings for Docker registry (if behind a proxy)
+proxy:
+  enabled: false  # Set to true if behind a proxy
+  url: "http://proxy.example.com:8080"  # Proxy URL
+  username: "proxy-username"  # Proxy username if required
+  password: "proxy-password"  # Proxy password if required

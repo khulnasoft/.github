@@ -1,0 +1,26 @@
+{
+    "name": "DevContainer",
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "features": {
+      "docker-in-docker": "latest",
+      "node": "lts",
+      "python": "3.10"
+    },
+    "postCreateCommand": "bash .devcontainer/setup.sh",
+    "customizations": {
+      "vscode": {
+        "extensions": [
+          "ms-azuretools.vscode-docker",
+          "esbenp.prettier-vscode",
+          "dbaeumer.vscode-eslint",
+          "ms-python.python",
+          "redhat.vscode-yaml"
+        ]
+      }
+    },
+    "mounts": [
+      "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached"
+    ],
+    "remoteUser": "vscode"
+  }
+  

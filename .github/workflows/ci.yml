@@ -1,0 +1,124 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main       # Trigger on push to the main branch
+  pull_request:
+    branches:
+      - main       # Trigger on pull request to the main branch
+
+jobs:
+  # Job for setting up the environment and running tests
+  build:
+    runs-on: ubuntu-latest  # Runner environment
+
+    steps:
+      # Step 1: Checkout the repository code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Docker (if your project involves Docker)
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      # Step 3: Set up Node.js (or any environment your project requires)
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # Adjust the Node.js version if needed
+
+      # Step 4: Install dependencies
+      - name: Install dependencies
+        run: |
+          npm install     # Change to `yarn install` or other package manager if necessary
+
+      # Step 5: Run tests
+      - name: Run tests
+        run: |
+          npm test        # Adjust if using a different testing framework
+
+      # Step 6: Build Docker image (optional if your project uses Docker)
+      - name: Build Docker image
+        run: |
+          docker build -t my-image:latest .  # Change image name and context if needed
+
+      # Step 7: Cache dependencies (optional for performance)
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+
+  # Job for security scanning (optional)
+  security:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Run security scans (e.g., using a tool like Snyk, Trivy, etc.)
+      - name: Run Snyk security scan
+        uses: snyk/actions/docker@v2
+        with:
+          snyk-token: ${{ secrets.SNYK_TOKEN }}
+
+  # Job for deploying to ArgoCD (optional)
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build  # Ensure this runs after the build job
+
+    steps:
+      # Step 1: Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up kubectl (for interacting with the Kubernetes cluster)
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          kubectl-version: 'v1.23.0'  # Adjust to the desired version
+
+      # Step 3: Set up ArgoCD CLI
+      - name: Set up ArgoCD CLI
+        run: |
+          curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/v2.6.3/argocd-linux-amd64
+          chmod +x /usr/local/bin/argocd
+
+      # Step 4: Login to ArgoCD (you should have your ArgoCD credentials in secrets)
+      - name: Login to ArgoCD
+        run: |
+          argocd login argocd.example.com --username ${{ secrets.ARGOCD_USERNAME }} --password ${{ secrets.ARGOCD_PASSWORD }} --insecure
+
+      # Step 5: Sync application in ArgoCD
+      - name: Sync ArgoCD Application
+        run: |
+          argocd app sync my-app  # Replace `my-app` with your ArgoCD application name
+
+  # Job for deploying OCI images (optional)
+  oci-deploy:
+    runs-on: ubuntu-latest
+    needs: build  # Ensure this runs after the build job
+
+    steps:
+      # Step 1: Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Log in to OCI registry
+      - name: Log in to OCI registry
+        uses: docker/login-action@v2
+        with:
+          registry: my-registry.com  # Replace with your OCI registry
+          username: ${{ secrets.OCI_USERNAME }}
+          password: ${{ secrets.OCI_PASSWORD }}
+
+      # Step 3: Build and push OCI image
+      - name: Build and push OCI image
+        run: |
+          docker build -t my-registry.com/my-image:latest .
+          docker push my-registry.com/my-image:latest
