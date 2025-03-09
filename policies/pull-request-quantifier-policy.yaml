@@ -1,0 +1,15 @@
+# Metadata
+name: "Pull Request Quantifier"
+description: "Quantifies pull requests based on repository rules."
+
+# Filters
+resource: "repository"
+where:
+  - repository.name.equals("PullRequestQuantifier", StringComparison.InvariantCultureIgnoreCase)
+  - repository.name.equals("GitOps", StringComparison.InvariantCultureIgnoreCase)
+  - repository.name.startsWith("GitOps.", StringComparison.InvariantCultureIgnoreCase)
+
+# Primitive Configuration
+configuration:
+  pullRequestQuantifier:
+    enabled: true
