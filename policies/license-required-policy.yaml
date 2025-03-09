@@ -1,0 +1,36 @@
+# Metadata
+name: "This repo is missing a LICENSE file"
+description: "Config to check if a LICENSE file is present in a repository."
+
+# Filters
+resource: "repository"
+where:
+  - |
+    # Exclude special repositories from the check
+    !repository.name.equals("vscode-wiki", StringComparison.InvariantCultureIgnoreCase)  # A special repo that mirrors vscode.wiki for contributions.
+    && !repository.name.equals("winforms-designer", StringComparison.InvariantCultureIgnoreCase)  # Private repo for third-party collaboration (VS Supplemental License).
+
+# Configuration
+configuration:
+  mandatoryFiles:
+    issueTitle: "This repo is missing a LICENSE file"
+    issueBody: |
+      This repository is currently missing a LICENSE file.
+
+      A license helps users understand how to use your project in a compliant manner. You can find the standard MIT license that Khulnasoft uses here: 
+      [MIT License](https://github.com/khulnasoft/repo-templates/blob/main/shared/LICENSE).
+
+      To learn more about open-source licenses, please refer to this document: [Khulnasoft License Guide](https://khulnasoft.com/license) (Khulnasoft-internal guidance).
+
+    prTitle: "Adding Khulnasoft LICENSE"
+    prBody: |
+      This pull request adds the standard Khulnasoft LICENSE to the repository.
+
+    file:
+      - path: "license((-|_)([a-z0-9])*)*(\.[-_a-z0-9]+)*"
+        ignoreCase: true
+
+    # Issue reminder configuration
+    issueReminder:
+      firstReminderGapDays: 7  # Reminder after 7 days
+      followUpReminderGapDays: 14  # Follow-up reminder after 14 days
