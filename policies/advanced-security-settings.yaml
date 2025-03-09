@@ -1,0 +1,12 @@
+# Metadata
+name: "Advanced Security Settings"
+description: "GitHub Advanced Security (GHAS) settings policy."
+
+# Resource Scope
+resource: "repository"
+
+# Configuration
+configuration:
+  advancedSecurity:
+    secretScanning: true
+    secretScanningPushProtection: true
