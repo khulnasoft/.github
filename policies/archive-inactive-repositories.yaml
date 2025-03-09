@@ -1,0 +1,18 @@
+# Metadata
+name: "AbandonedRepo"
+description: "Policy to archive repositories that have been inactive for a specified period."
+
+# Ownership (Add the responsible team/individual for this policy)
+owner: "your-team-name"  # Replace with actual owner
+
+# Resource Scope
+resource: "repository"
+
+# Conditions (Add specific conditions for identifying abandoned repos, if applicable)
+where: []
+
+# Configuration
+configuration:
+  abandonedRepoPrimitive:
+    isEnabled: true
+    notUsedDays: 1600  # 4.5 years of inactivity
