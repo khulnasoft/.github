@@ -1,0 +1,21 @@
+# Metadata
+name: "platform_context"
+description: "Defines the context for the GitOps platform, driving GitOps-specific policies."
+
+# Ownership (Add a valid owner if applicable)
+owner: "your-team-name"  # Replace with an actual owner
+
+# Resource Scope
+resource: "repository"
+
+# Conditions
+where: []
+
+# Configuration
+configuration:
+  platformContext:
+    active: true
+
+# Event Handling (Define actions for failures and successes)
+onFailure: "log_and_notify"  # Replace with actual failure handling action
+onSuccess: "proceed"         # Replace with actual success handling action
