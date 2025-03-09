@@ -1,0 +1,28 @@
+name: "Branch Protection Policy"
+description: "Defines rules for branch protection in the repository."
+
+resource: "repository"
+
+configuration:
+  branchProtectionRules:
+    enabled: true
+    defaultBranch: "main"
+    requirePullRequestReviews: true
+    requiredApprovals: 2
+    dismissStaleReviews: true
+    enforceAdmins: true
+    requireStatusChecks: true
+    requiredStatusChecks:
+      contexts:
+        - "ci/cd-tests"
+        - "lint-checks"
+        - "security-scans"
+    restrictions:
+      pushAccess:
+        - "admins"
+        - "maintainers"
+      mergeAccess:
+        - "admins"
+        - "maintainers"
+    allowForcePushes: false
+    allowDeletions: false
