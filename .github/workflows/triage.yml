@@ -1,0 +1,17 @@
+name: Auto Triage Issues to Project Board
+
+on:
+  issues:
+    types: [opened, labeled]
+  pull_request:
+    types: [opened, labeled]
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add issue or PR to project board
+        uses: actions/add-to-project@v1
+        with:
+          project-url: https://github.com/orgs/khulnasoft/projects/9
+          github-token: ${{ secrets.ORG_REPO_TOKEN }}
