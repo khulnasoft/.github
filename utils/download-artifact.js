@@ -5,7 +5,10 @@ module.exports = async function downloadArtifact({ github, context, fs, workflow
     repo: context.repo.repo,
     run_id: workflowRunId,
   });
-  const matchArtifact = artifacts.data.artifacts.filter((artifact) => artifact.name == artifactName)[0];
+  const matchArtifact = artifacts.data.artifacts.find((artifact) => artifact.name === artifactName);
+  if (!matchArtifact) {
+    throw new Error(`Artifact with name "${artifactName}" not found.`);
+  }
   const download = await github.rest.actions.downloadArtifact({
     owner: context.repo.owner,
     repo: context.repo.repo,
